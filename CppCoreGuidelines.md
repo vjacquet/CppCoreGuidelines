@@ -680,13 +680,19 @@ How do we transfer both ownership and all information needed for validating use?
         return p;
     }
 
-    owner<int*> f7(int n)    // bad: loses n and we might forget to delete
+    owner<int*> f7(int n)    // bad: loses n and we might forget to delete[]
     {
         owner<int*> p = new int[n];
         // ... initialize *p ...
         return p;
     }
 
+    span<int> f8(int n)    // bad: loses ownership
+    {
+        auto p = new int[n];
+        // ... initialize *p ...
+        return{ p, n };
+    }
 
 ##### Example
 
